@@ -6,24 +6,26 @@ Highlight code in Quaint markup using highlight.js.
 
 Usage:
 
-    var quaint = require("quaint");
-    var qhl = require("quaint-highlight");
+```javascript
+var quaint = require("quaint");
+var qhl = require("quaint-highlight");
 
-    var q = quaint(qhl);
+var q = quaint(qhl);
 
-    q.toHTML("javascript & function f() { return 123; }")
-    // ==> highlight the function in javascript
+q.toHTML("javascript & function f() { return 123; }")
+// ==> highlight the function in javascript
 
-    q.toHTML("& function f() { return 123; }")
-    // ==> highlight the function using the default language
-       (see default option below)
+q.toHTML("& function f() { return 123; }")
+// ==> highlight the function using the default language
+// (see default option below)
+```
 
 Options:
 
 **`operatorBlock`** (default: `"&"`) - define the operator for block
 highlighting.
 
-**`operatorInline`** (default: `"\`"`) - define the operator for
+**`operatorInline`** (default: ``"`"``) - define the operator for
 inline highlighting.
 
 **`default`** (default: null) - define the language to use for
