@@ -2,6 +2,7 @@
 require:
    quaint -> tools
    "highlight.js" as hljs
+   /html
 
 
 hl{hljs, raw-lang, code, inline, default-language} =
@@ -16,9 +17,9 @@ hl{hljs, raw-lang, code, inline, default-language} =
             try:
                hljs.highlight{langstr, code}.value
             catch e:
-               code
+               html{code}
          else:
-            code
+            html{code}
    if inline:
       code.hl[raw] % body
    else:
