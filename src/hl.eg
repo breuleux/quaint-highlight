@@ -31,7 +31,7 @@ main{*match} =
       options.install-plugins??{current-hljs}
       block-rule = '\\maybe\\lang {options.operator-block or "&"} \\body'
       inline-rule = '\\maybe\\lang {options.operator-inline or "`"} \\body' ;;"
-      @register-rule with {
+      @register-rules with {
          [^block-rule]{engine, {=> lang, => body}} =
             code = tools.dedent{tools.raw-relative{body}.replace{R"^ *\n", ""}}
             raw-lang = lang.raw{}.trim{}
