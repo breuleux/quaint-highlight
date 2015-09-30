@@ -30,17 +30,17 @@ main{*match} =
       current-hljs = options.hljs
       options.install-plugins??{current-hljs}
 
-      block-rule{engine, {=> lang = "", => body}} =
+      block-rule{engine, {=> lang = null, => body}} =
          code = tools.dedent{tools.raw-relative{body}.replace{R"^ *\n", ""}}
-         raw-lang = lang??.raw{}.trim{}
+         raw-lang = lang??.raw{}.trim{} or ""
          hl{current-hljs, raw-lang, code, false
-            options.default-block or options.default}
+            options.default-block or options.default-language or options.default}
 
-      inline-rule{engine, {=> lang = "", => body}} =
+      inline-rule{engine, {=> lang = null, => body}} =
          code = tools.shed{body}.raw{}.replace{R.g"\\+[{}()\[\]]", x -> x.slice{1}}
-         raw-lang = lang??.raw{}.trim{}
+         raw-lang = lang??.raw{}.trim{} or ""
          hl{current-hljs, raw-lang, code, true
-            options.default-inline or options.default}
+            options.default-inline or options.default-language or options.default}
 
       @register-rules with {
          '\\maybe\\lang {options.operator-block or "&"} \\body' =>
