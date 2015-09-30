@@ -29,19 +29,28 @@ main{*match} =
    {[@] and {is-quaint-engine => true?}, options = {=}} ->
       current-hljs = options.hljs
       options.install-plugins??{current-hljs}
-      block-rule = '\\maybe\\lang {options.operator-block or "&"} \\body'
-      inline-rule = '\\maybe\\lang {options.operator-inline or "`"} \\body' ;;"
+
+      block-rule{engine, {=> lang = "", => body}} =
+         code = tools.dedent{tools.raw-relative{body}.replace{R"^ *\n", ""}}
+         raw-lang = lang??.raw{}.trim{}
+         hl{current-hljs, raw-lang, code, false
+            options.default-block or options.default}
+
+      inline-rule{engine, {=> lang = "", => body}} =
+         code = tools.shed{body}.raw{}.replace{R.g"\\+[{}()\[\]]", x -> x.slice{1}}
+         raw-lang = lang??.raw{}.trim{}
+         hl{current-hljs, raw-lang, code, true
+            options.default-inline or options.default}
+
       @register-rules with {
-         [^block-rule]{engine, {=> lang, => body}} =
-            code = tools.dedent{tools.raw-relative{body}.replace{R"^ *\n", ""}}
-            raw-lang = lang.raw{}.trim{}
-            hl{current-hljs, raw-lang, code, false
-               options.default-block or options.default}
-         [^inline-rule]{engine, {=> lang, => body}} =
-            code = tools.shed{body}.raw{}.replace{R.g"\\+[{}()\[\]]", x -> x.slice{1}}
-            raw-lang = lang.raw{}.trim{}
-            hl{current-hljs, raw-lang, code, true
-               options.default-inline or options.default}
+         '\\maybe\\lang {options.operator-block or "&"} \\body' =>
+            block-rule
+         '\\maybe\\lang {options.operator-inline or "`"} \\body' => ;;"
+            inline-rule
+         '{options.operator-block or "&"} \\body' =>
+            block-rule
+         '{options.operator-inline or "`"} \\body' => ;;"
+            inline-rule
       }
    {options = {=}} ->
       {@} -> main{@, options}
