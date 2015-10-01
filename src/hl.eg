@@ -20,9 +20,9 @@ hl{hljs, raw-lang, code, inline, default-language} =
          else:
             html{code}
    if inline:
-      code.hl[raw] % body
+      code.hl % raw % body
    else:
-      pre.hl[raw] % body
+      pre.hl % raw % body
 
 
 main{*match} =
