@@ -2,7 +2,7 @@
 quaint-highlight
 ================
 
-Highlight code in Quaint markup using highlight.js.
+Highlight code in Quaint markup using [highlight.js](https://highlightjs.org/).
 
 
 Usage
@@ -24,6 +24,7 @@ Import `quaint-highlight` directly in `file.q`:
 ```
 plugin highlight ::
   defaultLanguage = python
+  theme = agate
 
 & def square(x): return x * x
 ```
@@ -70,3 +71,11 @@ highlighting by default for *inline code*.
 **`installPlugins`** (default: null) - a function that will be called
 on the `highlight.js` instance. You can configure it, add languages,
 and so on.
+
+**`theme`** (default: `"default"`) - the theme to use. See
+[here](https://highlightjs.org/static/demo/) for a demo of the themes.
+
+You can also use a custom theme if you wish. If the theme name ends
+with `.css`, `quaint-highlight` will assume it is a path to the css
+file to use.
+
