@@ -1,5 +1,6 @@
 
 require:
+   path
    quaint -> tools
    /html
 
@@ -20,9 +21,9 @@ hl{hljs, raw-lang, code, inline, default-language} =
          else:
             html{code}
    if inline:
-      code.hl % raw % body
+      code.hlinline % raw % body
    else:
-      pre.hl % raw % body
+      pre.hljs % raw % body
 
 
 main{*match} =
@@ -41,6 +42,16 @@ main{*match} =
          raw-lang = lang??.raw{}.trim{} or ""
          hl{current-hljs, raw-lang, code, true
             options.default-inline or options.default-language or options.default}
+
+      theme = options.theme or .default
+      @register-resources with {
+         'style/{theme}.css' => {
+            path = path.join{__dirname, '../node_modules/highlight.js/styles/{theme}.css'}
+            contents = true
+            type = .css
+            method = .head
+         }
+      }
 
       @register-rules with {
          '\\maybe\\lang {options.operator-block or "&"} \\body' =>
