@@ -5,48 +5,28 @@ quaint-highlight
 Highlight code in Quaint markup using [highlight.js](https://highlightjs.org/).
 
 
-Usage
------
+## Install
 
-**Command-line**
+    quaint --setup highlight
 
-Set up `quaint-highlight` for use with `file.q`:
+Follow the instructions.
 
-```bash
-$ npm install quaint-highlight
-$ quaint -p highlight file.q
+
+## Sample configuration
+
+This configuration entry must be added in the `plugins` field of
+`quaint.json`:
+
+```json
+"highlight": {
+  "theme": "agate",
+  "defaultBlock": "javascript",
+  "defaultInline": "javascript",
+  "operatorBlock": "&",
+  "operatorInline": "`"
+}
 ```
 
-**Quaint**
-
-Import `quaint-highlight` directly in `file.q`:
-
-```
-plugin highlight ::
-  defaultLanguage = python
-  theme = agate
-
-& def square(x): return x * x
-```
-
-**API**
-
-```javascript
-var quaint = require("quaint");
-var qhl = require("quaint-highlight");
-
-var q = quaint(qhl);
-
-q.toHTML("javascript & function f() { return 123; }")
-// ==> highlight the function in javascript
-
-
-q = quaint(qhl({defaultLanguage: "javascript"}));
-
-q.toHTML("& function f() { return 123; }")
-// ==> highlight the function using the default language
-// (defaultLanguage option is described below)
-```
 
 Options
 -------
