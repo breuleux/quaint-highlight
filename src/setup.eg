@@ -38,6 +38,35 @@ async quaint-setup{config, instructions} =
 
    data.theme or= "default"
 
+   is-lang = await inq.confirm{"Do you want to set a default language?", {default = false}}
+   {lang, which} =
+      if is-lang:
+         {
+            await inq.input{"What is the default language?"} with
+               {
+                  default = data.default-block
+                  validate{name} =
+                     [name != ""] or "You must enter the name of a language to highlight."
+               }
+            await inq.checkbox{"Use the default language for:"} with
+               {
+                  {name = "Code blocks"
+                   value = .default-block
+                   checked = if{undefined? data.default-block
+                                true
+                                true? data.default-block}}
+                  {name = "Inline code"
+                   value = .default-inline
+                   checked = true? data.default-inline}
+               }
+         }
+      else:
+         {null, {}}
+
+   data.default-block = null
+   data.default-inline = null
+   which each field -> data[field] = lang or null
+
 
 
 provide = quaint-setup
