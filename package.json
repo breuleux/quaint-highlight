@@ -9,6 +9,7 @@
   },
   "keywords": [
     "quaint",
+    "quaint-plugin",
     "highlight",
     "highlighting"
   ],
@@ -20,7 +21,7 @@
     "earlgrey-runtime": ">=0.0.11",
     "highlight.js": "^8.7.0",
     "inquirer-promise": "0.0.3",
-    "quaint": ">=0.0.8"
+    "quaint": ">=0.0.14"
   },
   "devDependencies": {
     "earlgrey": ">=0.0.12",
