@@ -1,0 +1,43 @@
+
+require:
+   inquirer-promise as inq
+   chalk
+   fs, path
+
+
+styles-dir = path.join{__dirname, '../node_modules/highlight.js/styles/'}
+
+
+async quaint-setup{config, instructions} =
+   url = "https://github.com/breuleux/quaint-highlight"
+   print 'Plugin documentation: {chalk.bold.cyan{url}}'
+
+   data = config.plugins.highlight or= {=}
+
+   theme = await inq.list{"What theme do you want to use?", themes, {default = 1}} where
+      themes = {
+         "Choose a file..."
+         "default"
+         new inq.Separator{}
+         *[
+            fs.readdir-sync{styles-dir} each name ->
+               if name.ends-with{".css"} and name !== "default.css":
+                  name[... -4]
+               else:
+                  continue
+         ]
+         new inq.Separator{}
+      }
+
+   match theme:
+      R"^Choose"? ->
+         p = await inq.input{'Path of the stylesheet relative to {config.content-root}/:'}
+         data.theme = p
+      else ->
+         data.theme = theme
+
+   data.theme or= "default"
+
+
+
+provide = quaint-setup
