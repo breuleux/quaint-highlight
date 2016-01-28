@@ -2,6 +2,9 @@
 require:
    .hl
    "highlight.js" as hljs
+   .hleg -> install as install-hleg
+
+install-hleg{hljs}
 
 main{*match} =
    {[@] and {is-quaint-engine => true?}, clone! options = {=}} ->
