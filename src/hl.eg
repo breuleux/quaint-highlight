@@ -1,7 +1,6 @@
 
 require:
    path
-   quaint -> tools
    /html
 
 
@@ -28,6 +27,8 @@ hl{hljs, raw-lang, code, inline, default-language} =
 
 main{*match} =
    {[@] and {is-quaint-engine => true?}, options = {=}} ->
+      tools = @tools
+
       current-hljs = options.hljs
       options.install-plugins??{current-hljs}
 

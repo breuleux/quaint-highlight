@@ -20,13 +20,13 @@
     "chalk": "^1.1.1",
     "earlgrey-runtime": ">=0.0.11",
     "highlight.js": "^8.7.0",
-    "inquirer-promise": "0.0.3",
-    "quaint": ">=0.0.14"
+    "inquirer-promise": "0.0.3"
   },
   "devDependencies": {
     "earlgrey": ">=0.0.12",
     "mocha": "^2.2.1",
-    "earl-mocha": ">=0.0.2"
+    "earl-mocha": ">=0.0.2",
+    "quaint": ">=0.0.15"
   },
   "scripts": {
     "refresh": "earl compile -5vso lib/ src/",
