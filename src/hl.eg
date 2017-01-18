@@ -57,7 +57,7 @@ main{*match} =
                if theme.ends-with{".css"}:
                   theme
                else:
-                  path.join{__dirname, '../node_modules/highlight.js/styles/{theme}.css'}
+                  path.join{__dirname, '../styles/{theme}.css'}
             contents = true
             type = .css
             method = .head
