@@ -1,7 +1,7 @@
 {
   "name": "quaint-highlight",
   "description": "Syntax highlighting for Quaint using highlight.js",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "format": "cjs",
   "repository": {
     "type": "git",
